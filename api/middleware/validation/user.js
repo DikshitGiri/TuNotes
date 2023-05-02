@@ -12,13 +12,13 @@ exports.validateUserSignup =
   
     }),
     check('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long').isStrongPassword().withMessage('Password must be strong (e.g. contain a mix of uppercase and lowercase letters, numbers, and symbols)'),
-    check('address').trim().not().isEmpty().withMessage('you cannot leave it blank'),
+    check('ddress').trim().not().isEmpty().withMessage('you cannot leave it blank'),
   //this one is a method created to check errors during validation and sending message to respective place.
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()){
       const errorMessages = errors.array().map(error => ({ message: error.msg }));
-    return res.status(422).json({ errors: errorMessages });
+    return res.status(422).json({  errorMessages });
   }
   next();
 }
