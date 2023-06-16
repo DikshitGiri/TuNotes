@@ -2,7 +2,9 @@ import React,  { useState } from 'react';
 import { View, Text, TextInput, Image,StyleSheet, Button ,TouchableOpacity} from 'react-native';
 import { useValidation } from 'react-native-form-validator';
 import { Ionicons } from 'react-native-vector-icons';
-import DocumentPicker  from 'react-native-document-picker';
+import * as DocumentPicker from 'expo-document-picker';
+import * as ImagePicker from 'expo-image-picker';
+
 // import { Ionicons } from '@expo/vector-icons';
 
 const Register = ({navigation}) => {
@@ -14,7 +16,7 @@ const Register = ({navigation}) => {
     const [isSecureEntry, setIsSecureEntry] = useState(true);
     const [message, setMessage] = useState('');
     const [checkEmail, setcheckEmail] = useState('');
-    const [imageUri, setImageUri] = useState('');
+   
 
     const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
     useValidation({
@@ -25,24 +27,24 @@ const Register = ({navigation}) => {
     setIsSecureEntry(!isSecureEntry);
     };
     
-    const handleDocumentPicker = async () => {
-        try {
-            const res = await DocumentPicker.pickSingle({
-                type: [DocumentPicker.types.images],
-            });
-            console.log(res);
-            setImageUri(res.uri);
+    // const handleImagePicker = async () => {
+     
+    //         const result = await ImagePicker.launchImageLibraryAsync({
+    //             mediaTypes: ImagePicker.MediaTypeOptions.All,
+    //             allowsEditing: true,
+    //             aspect: [4, 3],
+    //             quality: 1,
+    //         });
+    //         console.log(result);
+    //         if (!result.canceled) {
+    //             setImageUri(result.assets[0].uri);
+    //         }
+    //     };
+  
+           
+        // setImageUri(result.uri);
             
-        } catch (error) {
-          
-            if (DocumentPicker.isCancel(error)){
-                console.log("user cancelled the upload", error);
-            }
-            else {
-                console.log(error);  
-            }
-        }
-    }
+        
     const successfulRegistratition = () => {
         setMessage('Successfully registered Now go back to login for login'); 
         
@@ -72,26 +74,35 @@ const Register = ({navigation}) => {
         });
     
             
-        console.log( username);
+      
   
+     
+           console.log(params);
         
         
             fetch('http://192.168.1.86:8000/Signup',{
                        
-                method:'POST',
-                headers: {
-                    'Content-Type':'application/json',
-                },
+                method: 'POST',
+                header:{
+                'content-type': 'application/json',
+            },
+
+              //While using fetch api we do not have to declare header and content type for fetching form-data, api automatically manages that
+
+
                 body: JSON.stringify({
                 
                     username: username,
                     email: email,
                     password: password,               
-                    address: address,                
+                    address: address,
+                    
                                
                 
                 }),
                 
+          
+             
                     
             })
                 .then(response => {
@@ -116,7 +127,7 @@ const Register = ({navigation}) => {
         return (
 
             <View style={styles.container}>
-        <TouchableOpacity onPress={handleDocumentPicker}>
+        {/* <TouchableOpacity onPress={handleImagePicker}>
         <View style={styles.profilePictureContainer}>
           {imageUri ? (
             <Image source={{ uri: imageUri }} style={styles.profilePicture} />
@@ -124,7 +135,7 @@ const Register = ({navigation}) => {
             <Text style={styles.placeholderText}>Select Profile Picture</Text>
           )}
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     
                 <Text style={styles.text}>Username</Text>
                 <TextInput style={styles.Input}

@@ -18,7 +18,9 @@ const userSchema = mongoose.Schema({
     address: {
         type: String,
         required:true,
-    },
+    },    
+        
+    
     avatar: Buffer,
 });
 
