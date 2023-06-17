@@ -1,14 +1,25 @@
-const User = require('../../models/user');
-const bcrypt = require('bcrypt');
+const User= require('../../models/user');
+const bcrypt =require ('bcrypt');
+const {setLoggedInUserId} =require( '../../middleWare');
+// const {getLoggedInUserId} =require('../../LoggedUser');
+
 exports.login = async (req, res) => {
     const { username, password } = req.body;
     console.log(username);
     console.log(password);
    
+   
+   
 
     // checking if username and password exists in database or not
     //first we need to find the user object based on name with finOne method
     User.findOne({ username }, function (error, user) {
+     
+// console.log(user.id);
+
+// const loggedInUserId = getLoggedInUserId();
+// console.log(loggedInUserId);
+
         if (error) {
             
             res.status(500).json({ message: "internal server error while searching for user" });
@@ -28,16 +39,17 @@ exports.login = async (req, res) => {
                 }
                 else {
                     res.status(200).json({ message: "username and password successfully verified" });
-                 
+                    setLoggedInUserId(user.id);
+                    
                 }
            
             });
         }
-    
-    });
        
-}
-
+    });
    
+}  
+
+  
  
    

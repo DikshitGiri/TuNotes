@@ -1,11 +1,11 @@
 const express = require('express');
 const { default: moongose } = require('mongoose');
 const UserProfileSchema = moongose.Schema({
-    // userId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'user',
-    //     required: true,
-    // },
+    user: {
+        type: moongose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+      },
     image: {
        
         type: String,

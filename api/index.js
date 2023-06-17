@@ -1,12 +1,14 @@
 const express = require('express');
-const User = require("./models/user");
+const { json, urlencoded } = require('express');
+// import User from "../models/user.js";
 const app = express();
 const port = '8000';
-const dotenv = require("dotenv");
+const { config } = require('dotenv');
 const cors = require('cors');
-app.use(express.json());
+
+app.use(json());
 app.use(cors());
-app.use(express.urlencoded({ extended: true }));
+app.use(urlencoded({ extended: true }));
 
 
 
@@ -15,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 // parse application/json
 
 // const expressValidator = express - validator();
-dotenv.config();
+config();
 require('./models/dbConnect');
 const UserRegistration = require('./routes/UserRegisterRouter');
 const UserLogin = require('./routes/UserLoginRouter');
@@ -45,5 +47,4 @@ app.use('/UploadProfile', UserProfile);
 // app.get('/signup', (req, res) => {
 //     res.send("hello world");
 // })
-
-module.exports = app;
+module.exports= app;

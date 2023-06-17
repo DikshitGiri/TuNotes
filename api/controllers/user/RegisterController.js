@@ -1,10 +1,6 @@
+const User =require( '../../models/user');
 
-
-
-
-const User = require('../../models/user');
-
-const bcrypt = require('bcrypt');
+const hash = require( 'bcrypt');
 
 
 const saltRounds = 10;
@@ -26,7 +22,7 @@ exports.createUser = async (req, res) => {
     if (existinguser) {
     return res.status(422).json({ message: 'E-mail already in use' });
     }
-    const hashedpassword = await bcrypt.hash(password, saltRounds);
+    const hashedpassword = await hash(password, saltRounds);
 //    console.log("hashed",hashedpassword)
 
     
@@ -34,7 +30,7 @@ exports.createUser = async (req, res) => {
   
 
     const user = await User({
-        // image: image,
+       
         username:username,
         email:email,
         password:hashedpassword,

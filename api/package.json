@@ -12,10 +12,17 @@
   "name": "api",
   "version": "1.0.0",
   "main": "index.js",
+
+
   "scripts": {
     "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@babel/cli": "^7.22.5",
+    "@babel/core": "^7.22.5",
+    "@babel/preset-env": "^7.22.5"
+  }
 }
