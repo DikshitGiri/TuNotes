@@ -13,7 +13,3 @@ exports.captureUserId=(req,res,next)=>{
     next();
 
 }
-
-
-
-

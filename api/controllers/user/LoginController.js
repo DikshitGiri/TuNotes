@@ -1,6 +1,6 @@
 const User= require('../../models/user');
 const bcrypt =require ('bcrypt');
-const {setLoggedInUserId} =require( '../../middleWare');
+const {setLoggedInUserId} =require( '../../middleware/captureUserId');
 // const {getLoggedInUserId} =require('../../LoggedUser');
 
 exports.login = async (req, res) => {

@@ -18,7 +18,7 @@ app.use(urlencoded({ extended: true }));
 
 // const expressValidator = express - validator();
 config();
-require('./models/dbConnect');
+require('./Connection/Dbconnect');
 const UserRegistration = require('./routes/UserRegisterRouter');
 const UserLogin = require('./routes/UserLoginRouter');
 const UserProfile = require('./routes/UserProfileRouter');

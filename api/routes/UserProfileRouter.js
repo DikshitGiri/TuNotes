@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const diskStorage = multer.diskStorage;
 const  {extname}  = require('path');
-const { captureUserId } = require('../middleWare');
+const { captureUserId } = require('../middleware/captureUserId');
 router.use(captureUserId);// Apply the captureUserId middleware to the UserProfileRouter
 // import userid from '../controllers/user/LoginController';
 const storage = diskStorage({ //it defines where to store and what should be the filename
